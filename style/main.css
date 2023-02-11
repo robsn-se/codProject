@@ -1,0 +1,33 @@
+body {
+    background-color: #5e5959;
+}
+.img {
+    height: 350px;
+    margin: 100px auto;
+    width: 80%;
+}
+.img li {
+    width: 100%;
+    height: 100%;
+    margin: 20px 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+.img img {
+    width: 25em;
+}
+.img div {
+    padding: 5px 20px;
+}
+.img p {
+    color: rgb(0, 0, 0);
+    font-size: 18px;
+}
+img. h6 {
+    margin: 5px 0;
+    color: rgb(226, 216, 216);
+    font-size: 16px;
+}
