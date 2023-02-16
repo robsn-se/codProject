@@ -1,12 +1,12 @@
 body {
     background-color: #5e5959;
 }
-.img {
+.container {
     height: 350px;
     margin: 100px auto;
     width: 80%;
 }
-.img li {
+.container li {
     width: 100%;
     height: 100%;
     margin: 20px 0;
@@ -16,13 +16,17 @@ body {
     justify-content: space-between;
     align-items: center;
 }
-.img img {
+.container img {
     width: 25em;
 }
-.img div {
-    padding: 5px 20px;
+.container div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    padding: 5px;
 }
-.img p {
+.container p {
     color: rgb(0, 0, 0);
     font-size: 18px;
 }
@@ -31,3 +35,48 @@ img. h6 {
     color: rgb(226, 216, 216);
     font-size: 16px;
 }
+
+textarea {
+    height: 200px;
+    width: 80%;
+    padding: 10px 20px;
+    margin-top: 20px;
+}
+
+form {
+    padding: 35px;
+    width: min-content;
+    min-width: 350px;
+    margin: 30px auto;
+    border: #ffffff 5px solid;
+    background: #706464;
+    height: 75%;
+}
+form div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+form img {
+    width: 60%;
+}
+
+form button {
+    margin-top: 15px;
+}
+
+/*//include "index.php";*/
+/*// Пример работы с сессиями.*/
+/*//session_start();*/
+/*// Если на сайт только-только зашли, обнуляем счетчик.*/
+/*if (!isset($_SESSION['count'])) $_SESSION['count'] = 0;*/
+/*// Увеличиваем счетчик в сессии.*/
+/*$_SESSION['count'] = $_SESSION['count'] + 1;*/
+/*?>*/
+/* <h2>Счетчик</h2>*/
+/*              В текущей сессии работы с браузером Вы открыли эту страницу*/
+/*<?=$_SESSION['count']?> раз(а).<br>*/
+/*                                                                                               Закройте браузер, чтобы обнулить счетчик.<br>*/
+/*<a href="<?=$_SERVER['SCRIPT_NAME']?>" target="_blank">*/
+/*                                                      Открыть дочернее окно браузера</a>.*/
