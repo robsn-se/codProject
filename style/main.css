@@ -1,6 +1,18 @@
 body {
-    background-color: #5e5959;
+    height: 100%;
+    background-color: #333;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    color: #fff;
+    font-size: 16px;
+    line-height: 24px;
 }
+
+.content {
+    max-width: 1330px;
+    margin: 0px auto;
+    padding: 50px 15px;
+}
+
 .container {
     height: 350px;
     margin: 100px auto;
@@ -66,17 +78,36 @@ form button {
     margin-top: 15px;
 }
 
-/*//include "index.php";*/
-/*// Пример работы с сессиями.*/
-/*//session_start();*/
-/*// Если на сайт только-только зашли, обнуляем счетчик.*/
-/*if (!isset($_SESSION['count'])) $_SESSION['count'] = 0;*/
-/*// Увеличиваем счетчик в сессии.*/
-/*$_SESSION['count'] = $_SESSION['count'] + 1;*/
-/*?>*/
-/* <h2>Счетчик</h2>*/
-/*              В текущей сессии работы с браузером Вы открыли эту страницу*/
-/*<?=$_SESSION['count']?> раз(а).<br>*/
-/*                                                                                               Закройте браузер, чтобы обнулить счетчик.<br>*/
-/*<a href="<?=$_SERVER['SCRIPT_NAME']?>" target="_blank">*/
-/*                                                      Открыть дочернее окно браузера</a>.*/
+
+.items {}
+.items__item {
+    display: flex;
+    margin: 0px 0px 30px 0px;
+}
+
+.items__image {
+    flex: 0 0 33.333%;
+    position: relative;
+    min-height: 150px;
+}
+
+.items__image img{
+    width: 25em;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.items__body {
+    flex: 1 1 auto;
+    padding: 0px 0px 0px 30px;
+}
+.items__label {
+    display: inline-block;
+    margin: 0px 0px 20px 0px;
+}
+.items__text {
+
+}

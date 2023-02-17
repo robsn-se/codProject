@@ -1,24 +1,30 @@
 <?php
+session_start();
 $images = [
-        "<img src='images/5.jpg'>",
-        "<img src='images/4.jpg'>",
-        "<img src='images/3.jpg'>",
-        "<img src='images/2.jpg'>",
-        "<img src='images/1.jpg'>"
+        'Природа' => '1',
+        'Горы' => '2',
+        'Море' => '3',
+        'Пустыня' => '4',
+        'Город' => '5'
 ] ?>
 
 <?php
-$title = "";
-if(isset($_POST["title"])) {
-    $title = $_POST["title"];
+if(isset($_POST["click"])) {
+    $_SESSION["title"] = $_POST["title"];
 }
 ?>
 
 <?php
-$date = "";
 if(isset($_POST["click"])) {
-    $date = date('Y-m-d H:i:s');
+    $_SESSION["date"] = date('Y-m-d H:i:s');
 }
+
+//if (isset($_POST["click"])){
+//    $currentDateTime = new \DateTime();
+//    $currentDateTime->setTimezone(new \DateTimeZone('Europe/Moscow'));
+//    $_SESSION["date"] = $currentDateTime->format('l-j-M-Y H:i:s A');
+//
+//}
 ?>
 
 <!doctype html>
@@ -32,42 +38,27 @@ if(isset($_POST["click"])) {
     <title>Document</title>
 </head>
 <body>
-<div class="container">
-    <li>
-        <a href="show_images.php"><img src='images/1.jpg'></a>
-        <div class="title">
-            <h6><?= $date ?></h6>
-            <p><?= $title ?></p>
+<div class="content">
+    <div class="items">
+        <?php foreach ($images as $name => $img)
+        { ?>
+        <div class="items__item">
+            <div class="items__image">
+                <a href="show_images.php">
+                    <img src="images/<?php echo $img  ?>.jpg" alt="">
+                </a>
+            </div>
+            <div class="items__body">
+                <h2><?php echo $name?></h2>
+                <div class="items__label"><?= $_SESSION["date"] ?></div>
+                <div class="items__text">
+                    <?= $_SESSION["title"] ?>
+                </div>
+            </div>
         </div>
-    </li>
-    <li>
-        <a href="show_images.php"><img src='images/2.jpg'></a>
-        <div>
-            <h6><?= $date ?></h6>
-            <p><?= $title ?></p>
-        </div>
-    </li>
-    <li>
-        <a href="show_images.php"><img src='images/3.jpg'></a>
-        <div>
-            <h6><?= $date ?></h6>
-            <p><?= $title ?></p>
-        </div>
-    </li>
-    <li>
-        <a href="show_images.php"><img src='images/4.jpg'></a>
-        <div>
-            <h6><?= $date ?></h6>
-            <p><?= $title ?></p>
-        </div>
-    </li>
-    <li>
-        <a href="show_images.php"><img src='images/5.jpg'></a>
-        <div>
-            <h6><?= $date ?></h6>
-            <p><?= $title ?></p>
-        </div>
-    </li>
+        <?php
+        } ?>
+    </div>
 </div>
 <script src="js/main.js"></script>
 </body>
