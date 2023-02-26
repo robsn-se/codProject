@@ -1,30 +1,26 @@
 <?php
 session_start();
-$images = [
-        'Природа' => '1',
-        'Горы' => '2',
-        'Море' => '3',
-        'Пустыня' => '4',
-        'Город' => '5'
-] ?>
-
-<?php
-if(isset($_POST["click"])) {
-    $_SESSION["title"] = $_POST["title"];
+ $images = array_diff(scandir("images"), ["..", "."]);
+//$images = ["1.jpg"]
+print_r($images);
+$images =  [
+    2 => "1.jpg",
+    3 => [
+        "image" => "2.jpg"
+    ],
+    4 => [
+        "image" => "3.jpg",
+        "date" => "12.05.2022",
+        "title" => "hello"
+    ],
+    5 => "4.jpg",
+    6 => "5.jpg"
+];
+if(isset($_GET["title"])) {
+    $_SESSION["images"] = $images;
+    $_SESSION["images"]["title"] = $_GET["title"];
+    $_SESSION["images"]["date"] = date('d.m.y H:i:s'); //, $_GET["date"]);
 }
-?>
-
-<?php
-if(isset($_POST["click"])) {
-    $_SESSION["date"] = date('Y-m-d H:i:s');
-}
-
-//if (isset($_POST["click"])){
-//    $currentDateTime = new \DateTime();
-//    $currentDateTime->setTimezone(new \DateTimeZone('Europe/Moscow'));
-//    $_SESSION["date"] = $currentDateTime->format('l-j-M-Y H:i:s A');
-//
-//}
 ?>
 
 <!doctype html>
@@ -40,26 +36,22 @@ if(isset($_POST["click"])) {
 <body>
 <div class="content">
     <div class="items">
-        <?php foreach ($images as $name => $img)
-        { ?>
+        <?php foreach ($_SESSION["images"] as $img) { ?>
         <div class="items__item">
             <div class="items__image">
-                <a href="show_images.php">
-                    <img src="images/<?php echo $img  ?>.jpg" alt="">
+                <a href="show_images.php?image=<?php echo $img ?>">
+                    <img src="images/<?php echo $img ?>" alt="">
                 </a>
             </div>
             <div class="items__body">
-                <h2><?php echo $name?></h2>
-                <div class="items__label"><?= $_SESSION["date"] ?></div>
+                <div class="items__label"><?= $_SESSION["images"]["date"] ?></div>
                 <div class="items__text">
-                    <?= $_SESSION["title"] ?>
+                    <?= $_SESSION["images"]["title"] ?>
                 </div>
             </div>
         </div>
-        <?php
-        } ?>
+        <?php } ?>
     </div>
 </div>
-<script src="js/main.js"></script>
 </body>
 </html>
