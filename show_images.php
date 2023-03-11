@@ -1,12 +1,12 @@
 <style>
     <?php include 'style/main.css';
     require_once 'index.php';
-    $image = $_GET['image'];
     ?>
 </style>
-<form action="index.php?image=<?php echo $image ?>" method="get">
+<form action="index.php" method="get">
     <div>
-        <img src="images/<?= $image ?>" alt="">
+        <input type="hidden" name="key" value="<?= $_GET['key'] ?>">
+        <img src="images/<?= $_SESSION["storage"][$_GET['key']]["image"] ?>" alt="">
         <textarea name="title"></textarea>
         <input type="submit">
     </div>

@@ -1,25 +1,18 @@
 <?php
 session_start();
- $images = array_diff(scandir("images"), ["..", "."]);
-//$images = ["1.jpg"]
-print_r($images);
-$images =  [
-    2 => "1.jpg",
-    3 => [
-        "image" => "2.jpg"
-    ],
-    4 => [
-        "image" => "3.jpg",
-        "date" => "12.05.2022",
-        "title" => "hello"
-    ],
-    5 => "4.jpg",
-    6 => "5.jpg"
-];
-if(isset($_GET["title"])) {
-    $_SESSION["images"] = $images;
-    $_SESSION["images"]["title"] = $_GET["title"];
-    $_SESSION["images"]["date"] = date('d.m.y H:i:s'); //, $_GET["date"]);
+if (!isset($_SESSION["storage"])) {
+    $images = array_diff(scandir("images"), ["..", "."]);
+    foreach ($images as $key => $image) {
+        $_SESSION["storage"][$key] = [
+            "image" => $image,
+            "date"  => date('d.m.y H:i:s')
+        ];
+    }
+}
+
+if(isset($_GET["title"], $_GET["key"])) {
+    $_SESSION["storage"][$_GET['key']]["title"] = $_GET["title"];
+    $_SESSION["storage"][$_GET['key']]["date"] = date('d.m.y H:i:s');
 }
 ?>
 
@@ -36,17 +29,19 @@ if(isset($_GET["title"])) {
 <body>
 <div class="content">
     <div class="items">
-        <?php foreach ($_SESSION["images"] as $img) { ?>
+        <?php foreach ($_SESSION["storage"] as $key => $value) { ?>
         <div class="items__item">
             <div class="items__image">
-                <a href="show_images.php?image=<?php echo $img ?>">
-                    <img src="images/<?php echo $img ?>" alt="">
+                <a href="show_images.php?key=<?= $key ?>">
+                    <img src="images/<?= $value["image"] ?>" alt="">
                 </a>
             </div>
             <div class="items__body">
-                <div class="items__label"><?= $_SESSION["images"]["date"] ?></div>
+                <div class="items__label">
+                    <?= $value["date"] ?? "-" ?>
+                </div>
                 <div class="items__text">
-                    <?= $_SESSION["images"]["title"] ?>
+                    <?= $value["title"] ?? "-" ?>
                 </div>
             </div>
         </div>
@@ -55,3 +50,4 @@ if(isset($_GET["title"])) {
 </div>
 </body>
 </html>
+
