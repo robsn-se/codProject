@@ -1,19 +1,25 @@
 <?php
 session_start();
-if (!isset($_SESSION["storage"])) {
+if (!isset($_SESSION["stock"])) {
     $images = array_diff(scandir("images"), ["..", "."]);
     foreach ($images as $key => $image) {
-        $_SESSION["storage"][$key] = [
+        $_SESSION["stock"][$key] = [
             "image" => $image,
             "date"  => date('d.m.y H:i:s')
         ];
     }
 }
+echo '<pre>', print_r( $_SESSION["stock"], 1), '</pre>'
 
+
+
+//echo '<pre>', print_r( $_SESSION["storage"]), '</pre>';
 if(isset($_GET["title"], $_GET["key"])) {
-    $_SESSION["storage"][$_GET['key']]["title"] = $_GET["title"];
-    $_SESSION["storage"][$_GET['key']]["date"] = date('d.m.y H:i:s');
+    $_SESSION["stock"][$_GET['key']]["title"] = $_GET["title"];
+    $_SESSION["stock"][$_GET['key']]["date"] = date('d.m.y H:i:s');
 }
+//echo '<pre>', print_r( $_GET['title'], 1), '</pre>';
+
 ?>
 
 <!doctype html>
@@ -29,10 +35,10 @@ if(isset($_GET["title"], $_GET["key"])) {
 <body>
 <div class="content">
     <div class="items">
-        <?php foreach ($_SESSION["storage"] as $key => $value) { ?>
+        <?php foreach ($_SESSION["stock"] as $key => $value) { ?>
         <div class="items__item">
             <div class="items__image">
-                <a href="show_images.php?key=<?= $key ?>">
+                <a href="show_images.php?key=                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               <?= $key ?>">
                     <img src="images/<?= $value["image"] ?>" alt="">
                 </a>
             </div>
@@ -50,4 +56,3 @@ if(isset($_GET["title"], $_GET["key"])) {
 </div>
 </body>
 </html>
-
